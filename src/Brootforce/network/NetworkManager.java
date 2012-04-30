@@ -24,7 +24,7 @@ public class NetworkManager {
             out.write(buffer, 0, 3);
 
             in.read(buffer, 0, 3);
-            System.out.println(" >read: ");
+            System.out.println(" >read: " + buffer[0] + " " + buffer[1] + " " + buffer[2]);
             //}
 
         } catch (Exception e) {
