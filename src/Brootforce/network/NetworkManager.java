@@ -17,13 +17,15 @@ public class NetworkManager {
             InputStream in = socket.getInputStream();
             OutputStream out = socket.getOutputStream();
 
-            while (true) {
-                buffer[0] = 35;
-                buffer[1] = 81;
-                buffer[2] = 127;
-                out.write(buffer, 0, 3);
+            //while (true) {
+            buffer[0] = 35;
+            buffer[1] = 81;
+            buffer[2] = 127;
+            out.write(buffer, 0, 3);
 
-            }
+            in.read(buffer, 0, 3);
+            System.out.println(" >read: ");
+            //}
 
         } catch (Exception e) {
             e.printStackTrace();
