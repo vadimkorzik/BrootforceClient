@@ -9,4 +9,5 @@ public class BruteforceManager {
     private String alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     private char[] alphabetChars = alphabet.toCharArray();
+    private int alphabetLength = alphabetChars.length;
 }
