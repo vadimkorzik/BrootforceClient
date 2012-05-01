@@ -1,4 +1,4 @@
-package Brootforce.GUI;
+package Bruteforce.GUI;
 
 import javax.swing.*;
 

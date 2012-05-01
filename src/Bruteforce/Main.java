@@ -1,6 +1,6 @@
-package Brootforce;
+package Bruteforce;
 
-import Brootforce.network.NetworkManager;
+import Bruteforce.network.NetworkManager;
 
 /**
  * User: Vadim | Date: 14.04.12 | Time: 20:51

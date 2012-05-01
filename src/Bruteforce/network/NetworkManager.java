@@ -1,8 +1,7 @@
-package Brootforce.network;
+package Bruteforce.network;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 /**
  * User: Vadim | Date: 14.04.12 | Time: 22:43
