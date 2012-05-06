@@ -15,6 +15,8 @@ public class BruteforceManager {
     private String lastPassword = null;
     private String sha1Hash = null;
 
+    private String password;
+
     public void setLastPassword(String lastPassword) {
         this.lastPassword = lastPassword;
     }
@@ -27,5 +29,11 @@ public class BruteforceManager {
         this.countIntervals = countIntervals;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void success(String password) {
+        this.password = password;
+    }
 }
