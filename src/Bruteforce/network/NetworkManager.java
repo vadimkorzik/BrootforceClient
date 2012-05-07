@@ -82,9 +82,9 @@ public class NetworkManager extends Thread {
         if (socket.isConnected()) {
             try {
                 socket.close();
-                Main.logger.message("Disconnect");
+                Main.logger.message("disconnect");
             } catch (IOException e) {
-                Main.logger.warning("connect(): " + "IOException");
+                Main.logger.warning("disconnect(): " + "IOException");
             }
         }
     }
@@ -106,7 +106,9 @@ public class NetworkManager extends Thread {
         }
 
         ByteBuffer tempBuffer = ByteBuffer.wrap(buffer);
-        return tempBuffer.getInt(1);
+        int result = tempBuffer.getInt(1);
+        Main.logger.message("Got the CountIntervals from the server: " + result);
+        return result;
     }
 
     public String getLastPassword() {
@@ -124,7 +126,9 @@ public class NetworkManager extends Thread {
             Main.logger.error("getLastPassword(): " + "IOException: " + "can't read from in");
             return null;
         }
-        return Commands.stringFromByteArray(buffer);
+        String result = Commands.stringFromByteArray(buffer);
+        Main.logger.message("Got the LastPassword from the server: " + result);
+        return result;
     }
 
     public String getSha1Hash() {
@@ -142,7 +146,9 @@ public class NetworkManager extends Thread {
             Main.logger.error("getSha1Hash(): " + "IOException: " + "can't read from in");
             return null;
         }
-        return Commands.stringFromByteArray(buffer);
+        String result = Commands.stringFromByteArray(buffer);
+        Main.logger.message("Got the Hsa1Hash from the server: " + result);
+        return result;
     }
 
     /**
@@ -167,15 +173,23 @@ public class NetworkManager extends Thread {
 
         ByteBuffer tempBuffer = ByteBuffer.wrap(buffer);
         int interval = tempBuffer.getInt(1);
-        if (buffer[0] == 1)
+        if (buffer[0] == 1) {
+            Main.logger.message("Got the current Interval from the server: -1 - " + "bruteforce finished");
             return -1;
-        else
+        } else {
+            Main.logger.message("Got the current Interval from the server: " + interval);
             return interval;
+        }
     }
 
-    public void success() {
+    public void successBrute() {
         buffer[0] = Commands.MESSAGE_OF_SUCCESSFUL_BRUTE;
         Commands.stringToByteArray(bruteforceManager.getPassword(), buffer);
+        try {
+            out.write(buffer);
+        } catch (IOException e) {
+            Main.logger.error("successBrute(): " + "IOException: " + "can't write to out");
+        }
     }
 
     @Override

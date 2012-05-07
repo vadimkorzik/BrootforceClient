@@ -8,12 +8,17 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Hash {
 
-    public static String getHash(String str) throws Exception {
-        MessageDigest digest = MessageDigest.getInstance("SHA-1");
+    public static String getHash(String str) {
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA-1");
+        } catch (Exception e) {
+            return "";
+        }
         return byteArrayToHexString(digest.digest(str.getBytes()));
     }
 
-    private static String byteArrayToHexString(byte[] bytes) throws Exception {
+    private static String byteArrayToHexString(byte[] bytes) {
         String result = "";
         for (int i = 0; i < bytes.length; i++) {
             result += Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1);

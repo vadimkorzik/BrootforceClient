@@ -5,7 +5,7 @@ package Bruteforce.core;
  */
 public class BruteforceManager {
 
-    private static String alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static String alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static char[] alphabetChars = alphabet.toCharArray();
     private static int alphabetLength = alphabetChars.length;
 
@@ -35,5 +35,9 @@ public class BruteforceManager {
 
     public void success(String password) {
         this.password = password;
+    }
+
+    public static char[] getAlphabetChars() {
+        return alphabetChars;
     }
 }
