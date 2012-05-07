@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 /**
  * User: Vadim | Date: 14.04.12 | Time: 22:43
@@ -25,7 +26,7 @@ public class NetworkManager extends Thread {
     byte[] buffer = new byte[BUFFER_SIZE];
     BruteforceManager bruteforceManager;
 
-    public NetworkManager(BruteforceManager bruteforceManager) {
+    public void setBruteforceManager(BruteforceManager bruteforceManager) {
         this.bruteforceManager = bruteforceManager;
     }
 
@@ -147,7 +148,7 @@ public class NetworkManager extends Thread {
             return null;
         }
         String result = Commands.stringFromByteArray(buffer);
-        Main.logger.message("Got the Hsa1Hash from the server: " + result);
+        Main.logger.message("Got the Sha1Hash from the server: " + result);
         return result;
     }
 
@@ -156,6 +157,7 @@ public class NetworkManager extends Thread {
      *         -1, if stop
      */
     public int getInterval() {
+        //Arrays.fill(buffer, (byte) 0);
         buffer[0] = Commands.REQUEST_FOR_INTERVAL;
         try {
             out.write(buffer);
@@ -163,9 +165,9 @@ public class NetworkManager extends Thread {
             Main.logger.error("getInterval(): " + "IOException: " + "can't write to out");
             return -1;
         }
-
+        int k;
         try {
-            in.read(buffer);
+            k = in.read(buffer);
         } catch (IOException e) {
             Main.logger.error("getInterval(): " + "IOException: " + "can't read from in");
             return -1;
@@ -173,7 +175,7 @@ public class NetworkManager extends Thread {
 
         ByteBuffer tempBuffer = ByteBuffer.wrap(buffer);
         int interval = tempBuffer.getInt(1);
-        if (buffer[0] == 1) {
+        if (interval == -1) {
             Main.logger.message("Got the current Interval from the server: -1 - " + "bruteforce finished");
             return -1;
         } else {

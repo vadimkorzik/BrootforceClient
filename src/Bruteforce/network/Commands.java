@@ -36,6 +36,7 @@ public class Commands {
         try {
             for (byte b : str.getBytes()) {
                 bytes[i] = b;
+                i++;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             Main.logger.error("stringToByteArray(): " + "ArrayIndexOutOfBoundsException");

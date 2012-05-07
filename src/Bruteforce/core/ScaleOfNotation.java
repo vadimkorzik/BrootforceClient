@@ -28,6 +28,8 @@ public class ScaleOfNotation {
     }
 
     public String fromTenRadix(long num) {
+        if (num == 0)
+            return "0";
         StringBuffer sb = new StringBuffer();
         int ost;
         while (num != 0) {
@@ -58,8 +60,8 @@ public class ScaleOfNotation {
                 return new String(chars);
             } else {
                 chars = new char[chars.length + 1];
-                chars[0] = alphabetChars[1];
-                Arrays.fill(chars, 1, chars.length, alphabetChars[0]);
+                //chars[0] = alphabetChars[0];
+                Arrays.fill(chars, 0, chars.length, alphabetChars[0]);
                 return new String(chars);
             }
         }

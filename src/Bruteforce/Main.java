@@ -17,10 +17,18 @@ public class Main {
     public static final Logger logger = new Logger();
 
     public static void main(String[] args) throws Exception {
-        BruteforceManager bm = new BruteforceManager();
-        NetworkManager nm = new NetworkManager(bm);
+        NetworkManager nm = new NetworkManager();
         nm.start();
-        nm.connect();
-        nm.getSha1Hash();
+        if (!nm.connect()) {
+            System.exit(0);
+        }
+        BruteforceManager bruteforceManager = new BruteforceManager(nm.getCountIntervals(), nm.getLastPassword(), nm.getSha1Hash());
+        nm.setBruteforceManager(bruteforceManager);
+        int interval = 0;
+        while ((interval = nm.getInterval()) != -1) {
+            if (bruteforceManager.brute(interval)) {
+                nm.successBrute();
+            }
+        }
     }
 }
