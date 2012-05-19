@@ -11,11 +11,19 @@ public class ScaleOfNotation {
 
     private char[] alphabetChars;
 
+    /**
+     * @param alphabetChars alphabet
+     */
     public ScaleOfNotation(char[] alphabetChars) {
         this.alphabetChars = alphabetChars;
         radix = alphabetChars.length;
     }
 
+    /**
+     * @param str Letters from
+     * @return number in the decimal system
+     * @see BruteforceManager.alphabet
+     */
     public long toTenRadix(String str) {
         long result = 0;
         int index = str.length();
@@ -27,6 +35,11 @@ public class ScaleOfNotation {
         return result;
     }
 
+    /**
+     * @param num number in the decimal system
+     * @return number int the radix system
+     * @see BruteforceManager.alphabet
+     */
     public String fromTenRadix(long num) {
         if (num == 0)
             return "0";
@@ -40,10 +53,18 @@ public class ScaleOfNotation {
         return sb.toString();
     }
 
+    /**
+     * @param chars word
+     * @param pos   position letter int word
+     */
     private void addTo(char[] chars, int pos) {
         chars[pos] = alphabetChars[Arrays.binarySearch(alphabetChars, chars[pos]) + 1];
     }
 
+    /**
+     * @param str current word
+     * @return next word
+     */
     public String incString(String str) {
         char[] chars = str.toCharArray();
         if (chars[chars.length - 1] != alphabetChars[alphabetChars.length - 1]) {
@@ -60,7 +81,6 @@ public class ScaleOfNotation {
                 return new String(chars);
             } else {
                 chars = new char[chars.length + 1];
-                //chars[0] = alphabetChars[0];
                 Arrays.fill(chars, 0, chars.length, alphabetChars[0]);
                 return new String(chars);
             }

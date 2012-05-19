@@ -5,10 +5,6 @@ package Bruteforce;
  */
 
 public class Logger {
-    public static void log(String msg) {
-        System.out.println("> " + msg);
-    }
-
     private String getCurrentTime() {
         return new java.text.SimpleDateFormat("dd.MM.yyyy '-' HH:mm:ss").format(java.util.Calendar.getInstance().getTime());
     }
